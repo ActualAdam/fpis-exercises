@@ -48,6 +48,14 @@ class ListingSpec extends FreeSpec with Matchers {
     }
   }
 
+  "formatFactorial" - {
+    "prints the factorial of x in English" in {
+      Listing.formatFactorial(4) should be (
+        "The factorial of 4 is 24"
+      )
+    }
+  }
+
   "Why can't I..." - {
     "use infix notation and imported members together?" ignore {
       import Listing._

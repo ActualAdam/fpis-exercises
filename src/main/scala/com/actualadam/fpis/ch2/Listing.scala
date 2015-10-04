@@ -20,4 +20,9 @@ object Listing {
     val msg = "The absolute value of %d is %d"
     msg.format(x, abs(x))
   }
+
+  def formatFactorial(x: Int) = {
+    val msg = "The factorial of %d is %d"
+    msg.format(x, factorial(x))
+  }
 }
