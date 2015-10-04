@@ -1,4 +1,4 @@
-package com.actualadam.fpis.ch2.listing
+package com.actualadam.fpis.ch2
 
 object Listing21 {
     def abs(n: Int): Int =
