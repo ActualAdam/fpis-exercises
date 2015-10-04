@@ -2,7 +2,7 @@ package com.actualadam.fpis.ch2
 
 import annotation.tailrec
 
-object Listing21 {
+object Listing {
   def abs(n: Int): Int =
     if (n < 0) -n
     else n
