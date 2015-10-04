@@ -2,7 +2,7 @@ package com.actualadam.fpis.ch2
 
 import annotation.tailrec
 
-object Listing241 {
+object Listing22 {
   def factorial(n: Int): Int = {
     @tailrec
     def go(n: Int, acc: Int): Int =
