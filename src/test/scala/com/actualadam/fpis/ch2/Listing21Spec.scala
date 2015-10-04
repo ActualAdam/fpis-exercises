@@ -18,6 +18,12 @@ class Listing21Spec extends FreeSpec with Matchers {
     }
   }
 
+  "factorial" - {
+    "performs the factorial operation" in {
+      Listing21 factorial 4 should be (24)
+    }
+  }
+
   "To access an object member, I can" - {
     "use dot notation" in {
       Listing21.abs(-42) should be(42)
@@ -45,7 +51,14 @@ class Listing21Spec extends FreeSpec with Matchers {
   "Why can't I..." - {
     "use infix notation and imported members together?" ignore {
       import Listing21._
-      // abs - 42 should be(42)
+      // abs -42 should be(42)   // interestingly my editor's scala formatter put a space between - and 42.
+                                 // what does it think I'm trying to do?
+
+      // abs 42 should be(42)    // this doesn't work either and
+
+      // My new guess is that infix notation is intended (solely) to appear to be an operation on 2 operands even though
+      // it's really calling a function of the first operand using the second operand as an argument.  Since there's
+      // no appearance of a first operand here, it's not actually infix notation as such.
     }
   }
 }
