@@ -25,4 +25,29 @@ object Listing {
     val msg = "The factorial of %d is %d"
     msg.format(x, factorial(x))
   }
+
+  def formatResult(name: String, n: Int, f: Int => Int) = {
+    val msg = "The %s of %d is %d"
+    msg.format(name, n, f(n))
+  }
+
+  def monomorphicFindFirst(ss: Array[String], key: String): Int = {
+    @tailrec
+    def loop(n: Int): Int = {
+      if (n >= ss.length) -1
+      else if (ss(n) == key) n
+      else loop(n + 1)
+    }
+    loop(0)
+  }
+
+  def findFirst[A](as: Array[A], key: A): Int = {
+    @tailrec
+    def loop(n: Int): Int = {
+      if (n >= as.length) -1
+      else if (as(n) == key) n
+      else loop(n + 1)
+    }
+    loop(0)
+  }
 }

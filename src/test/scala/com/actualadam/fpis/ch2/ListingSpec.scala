@@ -56,6 +56,42 @@ class ListingSpec extends FreeSpec with Matchers {
     }
   }
 
+  "formatResult" - {
+    import Listing._
+    "should format an abs call" in {
+      formatResult("absolute value", -42, abs) should be (
+        "The absolute value of -42 is 42"
+      )
+    }
+    "should format a factorial call" in {
+      formatResult("factorial", 4, factorial) should be (
+        "The factorial of 4 is 24"
+      )
+    }
+  }
+
+val homeKeys = Array("a", "s", "d", "f", "j", "k", "l", ";")
+
+  "monomorphicFindFirst" - {
+    import Listing._
+    "finds the index of the first occurance of a string item in a given array of strings" in {
+      monomorphicFindFirst(homeKeys, "f") should be (3)
+    }
+    "returns -1 if no strings in the array match the given key" in {
+      monomorphicFindFirst(homeKeys, "z") should be (-1)
+    }
+  }
+
+ "polymorphicFindFirst" - {
+   import Listing._
+   "works on Strings" in {
+     findFirst(homeKeys, "j") should be (4)
+   }
+   "works on Ints" in {
+     findFirst(Array(1, 2, 3, 4, 5), 3) should be (2)
+   }
+ }
+
   "Why can't I..." - {
     "use infix notation and imported members together?" ignore {
       import Listing._
