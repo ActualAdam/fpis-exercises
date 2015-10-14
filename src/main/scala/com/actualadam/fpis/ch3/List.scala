@@ -18,6 +18,23 @@ object List {
     case Cons(x,xs) => x * product(xs)
   }
 
+  def fill[A](n: Int, a: A): List[A] = {
+    def loop(n: Int, a: A, as: List[A]): List[A] = {
+      if (n <= 0) as
+      else loop(n - 1, a, Cons(a,as))
+    }
+    loop(n, a, Nil)
+  }
+
+  def tail[A](as: List[A]): List[A] = as match {
+    case Nil => as
+    case Cons(x,xs) => xs
+  }
+
+  def setHead[A](a: A, as: List[A]): List[A] = {
+    Cons(a,as)
+  }
+
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
