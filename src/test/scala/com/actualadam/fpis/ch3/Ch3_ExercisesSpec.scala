@@ -48,8 +48,13 @@ class Ch3_Exercises extends FreeSpec with Matchers {
     }
   }
   "Exercise 3.6 List.init" - {
-    "retuns a list of all but the last element of the given list" - {
+    "retuns a list of all but the last element of the given list" in {
       List.init(List(1,2,3,4)) should be (List(1,2,3))
     }
+  }
+
+  "3.8 replace constructors with replacements for the replacements of the constructors" in {
+    val theList = List(1,2,3,4,5)
+    List.foldRight(theList, Nil: List[Int])((x,y) => Cons(x,y)) should be(theList)
   }
 }

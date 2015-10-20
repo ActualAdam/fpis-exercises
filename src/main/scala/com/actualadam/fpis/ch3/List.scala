@@ -60,6 +60,11 @@ object List {
     case _ => l
   }
 
+  def dropWhileCurried[A](as: List[A])(f: A => Boolean): List[A] = as match {
+    case Cons(h,t) if f(h) => dropWhileCurried(t)(f)
+    case _ => as
+  }
+
   /*
   * Appends the elements of the a2 to a1.
   */
@@ -74,6 +79,28 @@ object List {
   def setHead[A](a: A, as: List[A]): List[A] = {
     Cons(a,as)
   }
+
+  /*
+  * Removes an element from the right side of the list.
+  */
+  def init[A](l: List[A]): List[A] = l match {
+    case Nil => l
+    case Cons(h, Nil) => Nil
+    case Cons(h, t) => Cons(h, init(t))
+  }
+
+  def foldRight[A,B](as: List[A], z: B)(f: (A,B) => B): B =
+    as match {
+      case Nil => z
+      case Cons(x, xs) => f(x, foldRight(xs, z)(f))
+    }
+
+  def sumFold(ns: List[Int]) =
+    foldRight(ns, 0)((x,y) => x + y)
+
+  def productFold(ns: List[Int]) =
+    foldRight(ns, 1.0)(_ * _)
+    
 
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil
