@@ -94,7 +94,7 @@ object List {
       case Cons(x, xs) => f(x, foldRight(xs, z)(f))
   }
 
-  def sumFoldr[A](ns: List[Int]): Int =
+  def sumFoldr(ns: List[Int]) =
     foldRight(ns, 0)((x,y) => x + y)
 
   def productFoldr(ns: List[Int]) =
@@ -103,6 +103,17 @@ object List {
   def length[A](as: List[A]): Int = {
     foldRight(as, 0)((_,acc) => acc + 1)
   }
+
+  def foldLeft[A,B](as: List[A], z: B)(f: (B,A) => B): B = as match {
+    case Nil => z
+    case Cons(x, xs) => f(foldLeft(xs, z)(f), x)
+  }
+
+  def sumFoldl(ns: List[Int]) =
+    foldLeft(ns, 0)((x,y) => x + y)
+
+  def productFoldl(ns: List[Int]) =
+    foldLeft(ns, 1.0)((x,y) => x * y)
 
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil
