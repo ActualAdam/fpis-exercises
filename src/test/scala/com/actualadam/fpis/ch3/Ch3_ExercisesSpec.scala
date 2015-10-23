@@ -53,6 +53,11 @@ class Ch3_Exercises extends FreeSpec with Matchers {
     }
   }
 
+  "3.8 replace constructors with replacements for the replacements of the constructors" in {
+    val theList = List(1,2,3,4,5)
+    List.foldRight(theList, Nil: List[Int])((x,y) => Cons(x,y)) should be(theList)
+  }
+
   "3.9 - Compute the length of a list using foldRight" in {
     List.length(List(1,2,3,4,5)) should be (5)
   }
@@ -62,8 +67,10 @@ class Ch3_Exercises extends FreeSpec with Matchers {
     List.productFoldl(List(1,2,3,4,5)) should be (120)
   }
 
-  "3.8 replace constructors with replacements for the replacements of the constructors" in {
-    val theList = List(1,2,3,4,5)
-    List.foldRight(theList, Nil: List[Int])((x,y) => Cons(x,y)) should be(theList)
+  "3.11 - reverse using fold" in {
+    List.reverse(List(1,2,3,4,5)) should be (List(5,4,3,2,1))
   }
+
+
+
 }

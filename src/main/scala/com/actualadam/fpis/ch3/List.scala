@@ -106,7 +106,7 @@ object List {
 
   def foldLeft[A,B](as: List[A], z: B)(f: (B,A) => B): B = as match {
     case Nil => z
-    case Cons(x, xs) => f(foldLeft(xs, z)(f), x)
+    case Cons(x, xs) => foldLeft(xs, f(z,x))(f)
   }
 
   def sumFoldl(ns: List[Int]) =
@@ -114,6 +114,9 @@ object List {
 
   def productFoldl(ns: List[Int]) =
     foldLeft(ns, 1.0)((x,y) => x * y)
+
+  def reverse[A](as: List[A]): List[A] =
+    foldLeft(as, Nil: List[A])((x,y) => Cons(y,x))
 
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil
