@@ -12,10 +12,11 @@ object Exercise21 {
     if (n < 1) return -1 // Is validation a side effect?
     @tailrec
     def go(n: Int, prev: Int, acc: Int): Int = {
-      println(s"n: $n, prev: $prev, acc: $acc") // side effect I don't know how to deal with: debug I/O
-      if (n <= 0) acc
+      if (n <= 0) prev
       else go(n - 1, acc, acc + prev)
     }
-    go(n, -1, 1)
+    go(n - 1, 0, 1)
   }
+
+
 }
