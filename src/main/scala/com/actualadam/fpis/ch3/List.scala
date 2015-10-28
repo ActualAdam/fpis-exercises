@@ -134,6 +134,9 @@ object List {
   def map[A,B](as: List[A])(f: A => B): List[B] =
     foldRight(as, Nil: List[B])((h,t) => Cons(f(h), t))
 
+  def filter[A](as: List[A])(f: A => Boolean): List[A] =
+    foldRight(as, Nil: List[A])((h,t) => if (f(h)) Cons(h,t) else t)
+
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))

@@ -93,4 +93,8 @@ class Ch3_Exercises extends FreeSpec with Matchers {
     List.map(List(1,2,3))((x) => x + 1) should be (List(2,3,4))
     List.map(List(1.1,1.2,1.3))((d) => d.toString) should be (List("1.1","1.2","1.3"))
   }
+
+  "3.19 - filter can remove all odd numbers from a list of integers" in {
+    List.filter(List(2,3,5,6,9,12,21,56))((x) => x % 2 == 0) should be (List(2,6,12,56))
+  }
 }
