@@ -104,6 +104,10 @@ object List {
     foldRight(as, 0)((_,acc) => acc + 1)
   }
 
+  def identity[A](as: List[A]): List[A] =
+    foldRight(as, Nil:List[A])(Cons(_,_))
+
+  @tailrec
   def foldLeft[A,B](as: List[A], z: B)(f: (B,A) => B): B = as match {
     case Nil => z
     case Cons(x, xs) => foldLeft(xs, f(z,x))(f)
@@ -117,6 +121,18 @@ object List {
 
   def reverse[A](as: List[A]): List[A] =
     foldLeft(as, Nil: List[A])((x,y) => Cons(y,x))
+
+  def appendFoldr[A](as1: List[A], as2: List[A]): List[A] =
+    foldRight(as1, as2)(Cons(_,_))
+
+  def mapAddOne(ns: List[Int]): List[Int] =
+    foldRight(ns, Nil: List[Int])((h,t) => Cons(h + 1,t))
+
+  def mapDoubleToString(ds: List[Double]): List[String] =
+    foldRight(ds, Nil: List[String])((h,t) => Cons(h.toString, t))
+
+  def map[A,B](as: List[A])(f: A => B): List[B] =
+    foldRight(as, Nil: List[B])((h,t) => Cons(f(h), t))
 
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil

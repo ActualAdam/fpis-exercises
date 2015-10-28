@@ -53,24 +53,42 @@ class Ch3_Exercises extends FreeSpec with Matchers {
     }
   }
 
-  "3.8 replace constructors with replacements for the replacements of the constructors" in {
+  "3.8 passing Nil and Cons (the constructors of List) to a foldRight is the identity of a List" in {
     val theList = List(1,2,3,4,5)
-    List.foldRight(theList, Nil: List[Int])((x,y) => Cons(x,y)) should be(theList)
+    List.identity(theList) should be (theList)
   }
 
   "3.9 - Compute the length of a list using foldRight" in {
     List.length(List(1,2,3,4,5)) should be (5)
   }
 
-  "3.10 - FoldLeft" in {
+  "3.10, 3.11 - FoldLeft" in {
     List.sumFoldl(List(1,2,3,4,5)) should be (15)
     List.productFoldl(List(1,2,3,4,5)) should be (120)
   }
 
-  "3.11 - reverse using fold" in {
+  "3.12 - reverse using foldr" in {
     List.reverse(List(1,2,3,4,5)) should be (List(5,4,3,2,1))
   }
 
+  "3.14 - append using foldr" in {
+    val list1 = List(1,2,3)
+    val list2 = List(2,3,4,5)
+    List.appendFoldr(list1, list2) should be (List(1,2,3,2,3,4,5))
+  }
 
+  "3.15 is hard"
 
+  "3.16 - function that transforms a list of integers by adding 1 to each element" in {
+    List.mapAddOne(List(1,2,3)) should be (List(2,3,4))
+  }
+
+  "3.17 - function that transforms a list of doubles to a list of strings" in {
+    List.mapDoubleToString(List(1.1,1.2,1.3)) should be (List("1.1","1.2","1.3"))
+  }
+
+  "3.18 - map" in {
+    List.map(List(1,2,3))((x) => x + 1) should be (List(2,3,4))
+    List.map(List(1.1,1.2,1.3))((d) => d.toString) should be (List("1.1","1.2","1.3"))
+  }
 }
