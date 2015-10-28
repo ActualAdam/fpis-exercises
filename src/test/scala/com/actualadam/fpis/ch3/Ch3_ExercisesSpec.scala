@@ -67,9 +67,11 @@ class Ch3_Exercises extends FreeSpec with Matchers {
     List.productFoldl(List(1,2,3,4,5)) should be (120)
   }
 
-  "3.12 - reverse using foldr" in {
+  "3.12 - reverse using fold" in {
     List.reverse(List(1,2,3,4,5)) should be (List(5,4,3,2,1))
   }
+
+  "3.13 is hard"
 
   "3.14 - append using foldr" in {
     val list1 = List(1,2,3)
