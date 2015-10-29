@@ -125,6 +125,9 @@ object List {
   def appendFoldr[A](as1: List[A], as2: List[A]): List[A] =
     foldRight(as1, as2)(Cons(_,_))
 
+  def concat[A](ls: List[List[A]]): List[A] =
+    foldRight(ls, Nil:List[A])(append)
+
   def mapAddOne(ns: List[Int]): List[Int] =
     foldRight(ns, Nil: List[Int])((h,t) => Cons(h + 1,t))
 
@@ -136,6 +139,13 @@ object List {
 
   def filter[A](as: List[A])(f: A => Boolean): List[A] =
     foldRight(as, Nil: List[A])((h,t) => if (f(h)) Cons(h,t) else t)
+
+  def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] =
+    concat(map(as)(f))
+
+  def filterWithFlatMap[A](as: List[A])(f: A => Boolean): List[A] =
+    flatMap(as)((a) => if (f(a)) Cons(a,Nil) else Nil)
+
 
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil

@@ -79,7 +79,9 @@ class Ch3_Exercises extends FreeSpec with Matchers {
     List.appendFoldr(list1, list2) should be (List(1,2,3,2,3,4,5))
   }
 
-  "3.15 is hard"
+  "3.15 - concatenate turns a list of lists into a flat list" in {
+    List.concat(List(List(1,1),List(2,2),List(3,3))) should be (List(1,1,2,2,3,3))
+  }
 
   "3.16 - function that transforms a list of integers by adding 1 to each element" in {
     List.mapAddOne(List(1,2,3)) should be (List(2,3,4))
@@ -96,5 +98,13 @@ class Ch3_Exercises extends FreeSpec with Matchers {
 
   "3.19 - filter can remove all odd numbers from a list of integers" in {
     List.filter(List(2,3,5,6,9,12,21,56))((x) => x % 2 == 0) should be (List(2,6,12,56))
+  }
+
+  "3.20 - flatMap maps each element to 0 or more elements" in {
+    List.flatMap(List(1,2,3))((i) => List(i,i)) should be (List(1,1,2,2,3,3))
+  }
+
+  "3.21 - filter with flatMap" in {
+    List.filterWithFlatMap(List(2,3,5,6,9,12,21,56))((x) => x % 2 == 0) should be (List(2,6,12,56))
   }
 }
