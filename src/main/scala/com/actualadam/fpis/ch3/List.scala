@@ -146,6 +146,8 @@ object List {
   def filterWithFlatMap[A](as: List[A])(f: A => Boolean): List[A] =
     flatMap(as)((a) => if (f(a)) Cons(a,Nil) else Nil)
 
+  def zipWithAddition[Int](ns1: )
+
 
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil

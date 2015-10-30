@@ -107,4 +107,8 @@ class Ch3_Exercises extends FreeSpec with Matchers {
   "3.21 - filter with flatMap" in {
     List.filterWithFlatMap(List(2,3,5,6,9,12,21,56))((x) => x % 2 == 0) should be (List(2,6,12,56))
   }
+
+  "3.22 - zip with addition" in {
+    List.zipWithAddition(List(1,2,3), List(4,5,6)) should be (List(5,7,9))
+  }
 }
