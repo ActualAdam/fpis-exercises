@@ -146,7 +146,18 @@ object List {
   def filterWithFlatMap[A](as: List[A])(f: A => Boolean): List[A] =
     flatMap(as)((a) => if (f(a)) Cons(a,Nil) else Nil)
 
-  def zipWithAddition[Int](ns1: )
+  def zipWithAddition(ns1: List[Int], ns2: List[Int]): List[Int] = (ns1,ns2) match  {
+    case (Nil,_) => Nil
+    case (_,Nil) => Nil
+    case (Cons(h1,t1), Cons(h2,t2)) => Cons(h1 + h2, zipWithAddition(t1,t2))
+  }
+
+  def zipWith[A](l1: List[A], l2: List[A])(f: (A,A) => A): List[A] = (l1,l2) match {
+    case (Nil,_) => Nil
+    case (_,Nil) => Nil
+    case (Cons(h1,t1), Cons(h2,t2)) => Cons(f(h1,h2), zipWith(t1,t2)(f))
+  }
+
 
 
   def apply[A](as: A*): List[A] =

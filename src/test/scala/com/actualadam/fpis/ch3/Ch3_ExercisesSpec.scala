@@ -111,4 +111,8 @@ class Ch3_Exercises extends FreeSpec with Matchers {
   "3.22 - zip with addition" in {
     List.zipWithAddition(List(1,2,3), List(4,5,6)) should be (List(5,7,9))
   }
+
+  "3.23 - zipWith ..." in {
+    List.zipWith(List(1,2,3), List(4,5,6))((a,b) => a + b) should be (List(5,7,9))
+  }
 }
