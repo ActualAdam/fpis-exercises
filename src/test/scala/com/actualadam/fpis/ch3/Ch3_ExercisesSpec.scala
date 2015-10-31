@@ -115,4 +115,41 @@ class Ch3_Exercises extends FreeSpec with Matchers {
   "3.23 - zipWith ..." in {
     List.zipWith(List(1,2,3), List(4,5,6))((a,b) => a + b) should be (List(5,7,9))
   }
+
+  "3.24 is hard"
+
+  "3.25 Tree.size counts all the nodes in a given tree" - {
+    val testTree: Tree[Int] = Branch(Branch(Leaf(1),Leaf(1)),Branch(Branch(Leaf(1),Leaf(1)),Leaf(1)))
+    Tree.size(testTree) should be (9)
+    Tree.size2(testTree) should be (9)
+  }
+
+  "3.26 Tree.max returns the greatest value in a Tree[Int]" - {
+    "root node is a branch" in {
+      val testTree: Tree[Int] = Branch(Branch(Leaf(1),Leaf(4)),Branch(Branch(Leaf(8),Leaf(2)),Leaf(3)))
+      Tree.maximum(testTree) should be (8)
+    }
+    "root node is a leaf" in {
+      Tree.maximum(Leaf(42)) should be (42)
+    }
+  }
+
+  "3.27 Tree.depth returns the maximum path length from the root node of a Tree to any leaf" - {
+    "root node is a leaf" in {
+      Tree.depth(Leaf(42)) should be (0)
+    }
+    "root node is a branch" in {
+      Tree.depth(Branch(Leaf(42), Leaf(24))) should be (1)
+      Tree.depth(Branch(Branch(Branch(Branch(Branch(Leaf(1),Leaf(1)), Leaf(1)), Leaf(1)), Leaf(1)), Leaf(1))) should be (5)
+      Tree.depth(Branch(Leaf(1), Branch(Leaf(1), Branch(Leaf(1), Leaf(1))))) should be (3)
+    }
+  }
+
+  "3.28 Tree.map creates a new tree by applying a function to each element" in {
+    Tree.map(Branch(Branch(Leaf(1), Leaf(4)), Leaf(2)))((x) => x + 1) should be (Branch(Branch(Leaf(2), Leaf(5)), Leaf(3)))
+  }
+
+
+
+
 }
