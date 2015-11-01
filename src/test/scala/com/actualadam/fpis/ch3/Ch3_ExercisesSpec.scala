@@ -149,6 +149,47 @@ class Ch3_Exercises extends FreeSpec with Matchers {
     Tree.map(Branch(Branch(Leaf(1), Leaf(4)), Leaf(2)))((x) => x + 1) should be (Branch(Branch(Leaf(2), Leaf(5)), Leaf(3)))
   }
 
+  "3.29 Tree.fold re-implement other functions" - {
+    "size" in {
+      val testTree: Tree[Int] = Branch(Branch(Leaf(1),Leaf(1)),Branch(Branch(Leaf(1),Leaf(1)),Leaf(1)))
+      Tree.size3(testTree) should be (9)
+    }
+    "maximum" in {
+      val testTree: Tree[Int] = Branch(Branch(Leaf(1),Leaf(4)),Branch(Branch(Leaf(8),Leaf(2)),Leaf(3)))
+      Tree.maximum2(testTree) should be (8)
+    }
+    "depth" - {
+      "root node is a leaf" in {
+        Tree.depth2(Leaf(42)) should be (0)
+      }
+      "root node is a branch" in {
+        Tree.depth2(Branch(Leaf(42), Leaf(24))) should be (1)
+        Tree.depth2(Branch(Branch(Branch(Branch(Branch(Leaf(1),Leaf(1)), Leaf(1)), Leaf(1)), Leaf(1)), Leaf(1))) should be (5)
+        Tree.depth2(Branch(Leaf(1), Branch(Leaf(1), Branch(Leaf(1), Leaf(1))))) should be (3)
+      }
+    }
+    "map" in {
+      Tree.map2(Branch(Branch(Leaf(1), Leaf(4)), Leaf(2)))((x) => x + 1) should be (Branch(Branch(Leaf(2), Leaf(5)), Leaf(3)))
+    }
+  }
+
+  /* Some notes from the answer key that seem important
+  Note the type annotation required on the expression `Leaf(f(a))`. Without this annotation, we get an error like this:
+  type mismatch;
+    found   : fpinscala.datastructures.Branch[B]
+    required: fpinscala.datastructures.Leaf[B]
+       fold(t)(a => Leaf(f(a)))(Branch(_,_))
+                                      ^
+  This error is an unfortunate consequence of Scala using subtyping to encode algebraic data types. Without the annotation, the result type of the fold gets inferred as `Leaf[B]` and it is then expected that the second argument to `fold` will return `Leaf[B]`, which it doesn't (it returns `Branch[B]`). Really, we'd prefer Scala to infer `Tree[B]` as the result type in both cases. When working with algebraic data types in Scala, it's somewhat common to define helper functions that simply call the corresponding data constructors but give the less specific result type:
+
+    def leaf[A](a: A): Tree[A] = Leaf(a)
+    def branch[A](l: Tree[A], r: Tree[A]): Tree[A] = Branch(l, r)
+  */
+  // def mapViaFold[A,B](t: Tree[A])(f: A => B): Tree[B] =
+  //   fold(t)(a => Leaf(f(a)): Tree[B])(Branch(_,_))
+
+
+
 
 
 

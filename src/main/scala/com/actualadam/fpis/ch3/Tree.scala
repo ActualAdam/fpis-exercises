@@ -50,4 +50,35 @@ object Tree {
     case Leaf(x) => Leaf(f(x))
     case Branch(l,r) => Branch(map(l)(f),map(r)(f))
   }
+
+  /*
+  * Generalized recursion through a given tree.
+  * l: the function to apply to each leaf
+  * b: the function to apply to each branch, recursively
+  */
+  def fold[A,B](t: Tree[A])(l: A => B)(b: (B,B) => B): B = t match {
+    case Leaf(x) => l(x)
+    case Branch(x,y) => b(fold(x)(l)(b), fold(y)(l)(b))
+  }
+
+  def size3[A](t: Tree[A]): Int =
+    fold(t)((_) => 1)((l,r) => 1 + l + r)
+
+  /*
+  * Maximum implemented using fold.
+  */
+  def maximum2(t: Tree[Int]): Int =
+    fold(t)((x) => x)((l,r) => l max r)
+
+  /*
+  * Depth implemented using fold.
+  */
+  def depth2[A](t: Tree[A]): Int =
+    fold(t)((_) => 0)((l,r) => 1 + (l max r))
+
+  /*
+  * Map implemented using fold.
+  */
+  def map2[A,B](t: Tree[A])(f: A => B): Tree[B] =
+    fold(t)((x) => Leaf(f(x)): Tree[B])(Branch(_,_))
 }
