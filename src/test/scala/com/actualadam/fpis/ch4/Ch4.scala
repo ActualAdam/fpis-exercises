@@ -15,4 +15,28 @@ class Ch4 extends FreeSpec with Matchers {
       mean(Seq()) should be (None)
     }
   }
+
+  "Exercise 4.1: Implement these functions on Option." - {
+    "map: map still maps 1:1. It just doesn't apply the function in tha case of None." - {
+      def plusOne(x: Int) = x + 1 // a test function that map will optionally be applied.
+      "function is applied when the option type is Some" in {
+        Some(4).map(plusOne) should be (Some(5))
+      }
+      "function is not applied when the option type is None" in {
+        None.map(plusOne) should be (None)
+      }
+    }
+    "flatMap acepts a function that emits an option and flattens" - {
+      def plusOneSometimes(x: Int): Option[Int] = if (x == 4) Some(x + 1) else None
+      "maps a function return of Some to a flat Some instead of a Some(Some(x))" in {
+        Some(4).flatMap(plusOneSometimes) should be (Some(5))
+      }
+      "maps a function return of None to a flat None" in {
+        Some(5).flatMap(plusOneSometimes) should be (None)
+      }
+    }
+    "getOrElse" - {}
+    "orElse" - {}
+    "filter" - {}
+  }
 }
