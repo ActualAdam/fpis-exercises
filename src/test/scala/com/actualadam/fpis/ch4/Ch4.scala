@@ -35,7 +35,14 @@ class Ch4 extends FreeSpec with Matchers {
         Some(5).flatMap(plusOneSometimes) should be (None)
       }
     }
-    "getOrElse" - {}
+    "getOrElse returns the value inside the some or else the given default value" - {
+      "returns the value inside a Some" in {
+        Some(6).getOrElse(9) should be (6)
+      }
+      "returns the default when None" in {
+        None.getOrElse(9) should be (9)
+      }
+    }
     "orElse" - {}
     "filter" - {}
   }
